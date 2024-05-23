@@ -1,0 +1,177 @@
+{% load static %}
+
+<div class="navbar bg-base-100 shadow-xl">
+
+	{% if messages %}
+    <div class="message-container">
+        {% include 'includes/toasts.html' %}
+    </div>
+	{% endif %}
+
+	<!-- Left Nav -->
+	<div class="navbar-start ml-2">
+		<!-- Light Mode Logo -->
+		<a href="/" class="logo-lightmode w-32">
+			<img src="{% static 'elements/logo/love-sched-logo-lightmode.svg' %}" alt="LoveSched Logo Light">
+		</a>
+		<!-- Dark Mode Logo -->
+		<a href="/" class="logo-darkmode w-32">
+			<img src="{% static 'elements/logo/love-sched-logo-darkmode.svg' %}" alt="LoveSched Logo Dark">
+		</a>
+	</div>
+
+	<div class="navbar-center">
+
+	
+	</div>
+
+	<!-- Right Nav -->
+	<div class="navbar-end">
+
+		<!-- Login/Signup Icon -->
+		<div class="dropdown dropdown-end">
+			<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+				</svg>
+			</div>
+			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[98] p-2 shadow bg-base-100 rounded-box w-52">
+				{% if user.is_authenticated %}
+
+					<li><a href="{% url 'profile' %}" class="btn btn-ghost justify-between">Profile
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+							</svg>
+						</span>
+					</a></li>
+					<li><a href="{% url 'account_logout' %}"
+							class="btn btn-ghost justify-between"
+							hx-get="{% url 'account_logout' %}"
+							hx-target="#my_modal_3 .modal-box"
+							onclick="my_modal_3.showModal()">Logout
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+							</svg>
+						</span>
+					</a></li>
+				{% else %}
+					<li><a href="{% url 'account_login' %}" class="btn btn-ghost justify-between">Login
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+							</svg>
+						</span>
+					</a></li>
+					<li><a href="{% url 'account_signup' %}" class="btn btn-ghost justify-between">Register
+						<span>
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+							</svg>
+						</span>
+					</a></li>
+				{% endif %}
+			</ul>
+		</div>
+
+		<div class="dropdown dropdown-end">
+			<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+				</svg>
+			</div>
+			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[98] p-2 shadow bg-base-100 rounded-box w-52">
+
+				<li><a href="{% url 'event_list' %}" class="btn btn-ghost justify-between">Valentine Ideas
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+						<path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+					</svg>
+				</a></li>
+				<li><a href="{% url 'dev_team' %}" class="btn btn-ghost justify-between">Meet the Team
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+						<path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd" />
+						<path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z" />
+					</svg>					  
+				</a></li>
+				<li><a href="{% url 'contact_us' %}" class="btn btn-ghost justify-between">Contact us
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+						<path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+						<path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+					</svg>
+				</a></li>
+				<li><a href="{% url 'tos' %}" class="btn btn-ghost justify-between">Terms of Service
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+						<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 0 1 .67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 1 1-.671-1.34l.041-.022ZM12 9a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
+					</svg>
+				</a></li>
+
+			</ul>
+		</div>
+
+		<!-- Theme Controller -->
+		<button class="btn btn-ghost btn-circle">
+			<div class="indicator">
+				<label class="swap swap-rotate">
+
+					<!-- this hidden checkbox controls the state -->
+					<input type="checkbox" class="theme-controller" value="synthwave" />
+
+					<!-- sun icon -->
+					<svg class="swap-on fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+
+					<!-- moon icon -->
+					<svg class="swap-off fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+
+				</label>
+			</div>
+		</button>
+	</div>
+</div>
+
+
+<!-- Theme Controller Script -->
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const themeController = document.querySelector('.theme-controller');
+		const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+		// Reference to the logos
+		const logoLightMode = document.querySelector('.logo-lightmode');
+		const logoDarkMode = document.querySelector('.logo-darkmode');
+
+		function updateLogosForTheme(theme) {
+			// Show or hide logos based on the theme
+			if (theme === 'dark') {
+				logoLightMode.style.display = 'none';
+				logoDarkMode.style.display = 'block';
+			} else {
+				logoLightMode.style.display = 'block';
+				logoDarkMode.style.display = 'none';
+			}
+		}
+
+		function setTheme(theme) {
+			document.documentElement.setAttribute('data-theme', theme);
+			themeController.checked = (theme === 'dark');
+			updateLogosForTheme(theme);
+			// Save the current theme preference to localStorage
+			localStorage.setItem('theme', theme);
+		}
+
+		// Attempt to retrieve the saved theme from localStorage
+		const savedTheme = localStorage.getItem('theme') || (systemPrefersDark ? 'dark' : 'valentine');
+
+		// Set the initial theme based on localStorage or system preference
+		setTheme(savedTheme);
+
+		// Listen for changes on the checkbox to manually switch themes
+		themeController.addEventListener('change', function() {
+			if (this.checked) {
+				setTheme('dark');
+			} else {
+				setTheme('valentine');
+			}
+		});
+	});
+</script>

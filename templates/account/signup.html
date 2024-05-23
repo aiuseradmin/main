@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load tailwind_filters %}
+
+{% block content %}
+
+<!-- Main content -->
+<section aria-labelledby="signup-title">
+
+    <div class="container flex flex-col items-center justify-center px-4 mx-auto mt-10">
+        <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100 dark:bg-slate-50">
+
+            <!-- Heading -->
+            <h1 id="signup-title" class="text-2xl font-bold text-center text-primary dark:text-secondary pt-2">Sign Up</h1>
+
+            <!-- Login Link Section -->
+            <div class="flex justify-center my-2 text-sm dark:text-black">
+                <p>Have an account?</p>
+                <a href="{% url 'account_login' %}"
+                    class="text-blue-500 ml-1"
+                    >
+                    Login
+                </a>
+            </div>
+
+            <!-- Form Section -->
+            <form class="card-body" method="POST"
+                >
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
+                <input type="hidden"
+                        name="{{ redirect_field_name }}"
+                        value="{{ redirect_field_value }}" />
+                {% endif %}
+                
+                <!-- Submit Button -->
+                <button id="signupButton" class="btn btn-primary dark:btn-secondary w-full mt-4" 
+                        type="submit"
+                        >
+                Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
